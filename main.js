@@ -85,4 +85,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 500);
     });
   }
+
+  // Review Form Submission
+  const reviewForm = document.getElementById('review-form');
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('review-name').value;
+      const rating = document.getElementById('review-rating').value;
+      const message = document.getElementById('review-message').value;
+      
+      const text = `Hello Shree Radhe Tour & Travels!\n\nI want to leave a review:\n\n*Name:* ${name}\n*Rating:* ${rating} Stars\n*Review:* ${message}`;
+      const encodedText = encodeURIComponent(text);
+      const whatsappUrl = `https://wa.me/917018260186?text=${encodedText}`;
+      
+      const btn = reviewForm.querySelector('button');
+      const originalText = btn.textContent;
+      btn.textContent = 'Opening WhatsApp...';
+      
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+        btn.textContent = originalText;
+        reviewForm.reset();
+      }, 500);
+    });
+  }
 });
